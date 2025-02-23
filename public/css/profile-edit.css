@@ -1,0 +1,158 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+form > div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+.current-avatar-container {
+    margin-top: 10px;
+}
+
+.current-avatar-container p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.current-avatar-container img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#social-links-container {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.social-link-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.social-link-group label {
+    text-align: right;
+}
+
+.social-link-group input[type="text"],
+.social-link-group input[type="url"] {
+    width: calc(100% - 10px);
+}
+
+
+.buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+button[type="submit"],
+button[type="button"],
+a.cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #5cb85c;
+}
+
+button[type="button"]:hover {
+    background-color: #4cae4c;
+}
+
+
+a.cancel-btn {
+    background-color: #6c757d;
+}
+
+a.cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+.remove-social-link {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.remove-social-link:hover {
+    background-color: #c9302c;
+}

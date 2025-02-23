@@ -1,0 +1,163 @@
+@property --a {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+@keyframes animate {
+    0% {
+        --a: 0deg;
+    }
+    100% {
+        --a: 360deg;
+    }
+}
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.background {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.5s ease-in-out;
+    background: url('/storage/images/wp3285251.jpg') no-repeat center center/cover;
+}
+
+/* Container chứa form */
+
+
+
+.form-container {
+    box-shadow: 2px 2px 1px rgb(68, 62, 62);
+    width: 400px;
+    padding: 20px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+
+}
+
+.form-container::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: repeating-conic-gradient(from var(--a), #45f3ff 0%, #45f3ff 10%, transparent 10%, transparent 80%, #45f3ff 100%);
+    border-radius: 20px;
+    animation: animate 2.5s linear infinite;
+} 
+
+
+
+
+.form-wrapper {
+    width: 200%;
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+
+.form {
+    width: 50%;
+    padding: 20px;
+}
+
+
+.move-left {
+    transform: translateX(-50%);
+}
+
+
+.input-box {
+    position: relative;
+    margin: 15px 0;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #fff;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+/* Hiệu ứng label khi nhập vào input */
+.input-box input:focus + label,
+.input-box input:not(:placeholder-shown) + label {
+    top: 0;
+    left: 10px;
+    font-size: 12px;
+    color: #000000;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* Định dạng thông báo lỗi / thành công */
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+.success {
+    color: green;
+    font-size: 14px;
+}
+
+/* Chuyển đổi giữa Login & Register */
+.toggle {
+    color: #00f7ff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.toggle:hover {
+    text-decoration: underline;
+}
+
+/* Chuyển đổi background */
+.change-bg {
+    background: url('/storage/images/wp3285251.jpg') no-repeat center center/cover !important;
+}
+
