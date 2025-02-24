@@ -55,6 +55,8 @@
                 </form>
                 <p>Already have an account? <span class="toggle" data-target="login-form">Login</span></p>
             </div>
+            <div>
+            </div>
         </div>
     </div>
 </div>

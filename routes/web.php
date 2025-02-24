@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 // Trang chủ
 Route::get('/', [PostController::class, 'home'])->name('home');
@@ -28,4 +30,24 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
 });
+
+use App\Http\Controllers\UserController;
+
+Route::get('/search', [UserController::class, 'search'])->name('users.search');
+
+use App\Http\Controllers\LikeController;
+
+Route::post('/post/{id}/like', [LikeController::class, 'likePost'])->name('post.like');
+Route::post('/post/{id}/unlike', [LikeController::class, 'unlikePost'])->name('post.unlike');
+
+
+// // Gửi email đặt lại mật khẩu
+// Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+// // Hiển thị form đặt lại mật khẩu
+// Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// // Xử lý đặt lại mật khẩu
+// Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
 
