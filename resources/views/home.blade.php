@@ -23,6 +23,8 @@
             max-width: 1200px;
             width: 95%;
             margin: 20px;
+            position: relative;
+            left: -90px;
         }
 
         /* Phần bên trái (Profile Card) */
@@ -86,7 +88,7 @@
 
         .social-link:hover {
             background-color: #555;
-            transform: scale(1.10);
+            transform: scale(1.05);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             color: #fff;
         }
@@ -165,6 +167,33 @@
             margin-top: 10px;
         }
 
+        .top-left-buttons {
+            position: relative;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .top-left-buttons a, .top-left-buttons button {
+            background-color: #333;
+            color: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-right: 250px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .top-left-buttons a:hover, .top-left-buttons button:hover {
+            background-color: #555;
+        }
+        .top-left-buttons form input {
+            width: 200px;
+            height: 35px;
+        }
 
         .top-right-buttons {
             position: absolute;
@@ -192,14 +221,25 @@
     </style>
 </head>
 <body>
-    <div class="top-right-buttons">
-        <a href="{{ route('posts.index') }}" class="profile-link">Posts</a>
-        <a href="{{ route('profile.edit') }}" class="profile-link">Profile</a>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="profile-link">Đăng xuất</button>
-        </form>
-    </div>
+    <navbar>
+        <div class="top-left-buttons">
+            <form action="{{ route('users.search') }}" method="GET">
+                <input type="text" name="query" placeholder="Search users..." required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="top-right-buttons">
+            <a href="{{ route('posts.index') }}" class="profile-link">Posts</a>
+            <a href="{{ route('profile.edit') }}" class="profile-link">Profile</a>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="profile-link">Đăng xuất</button>
+            </form>
+        </div>
+    </navbar>
+    
+
 
     <div class="container">
         <div class="profile-card">

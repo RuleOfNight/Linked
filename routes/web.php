@@ -41,6 +41,10 @@ Route::post('/post/{id}/like', [LikeController::class, 'likePost'])->name('post.
 Route::post('/post/{id}/unlike', [LikeController::class, 'unlikePost'])->name('post.unlike');
 
 
+
+Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile');
+
+
 // // Gửi email đặt lại mật khẩu
 // Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 

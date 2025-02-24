@@ -21,11 +21,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                
-            <form action="{{ route('users.search') }}" method="GET">
-                <input type="text" name="query" placeholder="Search users..." required>
-                <button type="submit">Search</button>
-            </form>
+
 
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
