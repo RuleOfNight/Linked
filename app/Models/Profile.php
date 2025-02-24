@@ -15,6 +15,6 @@ class Profile extends Model
 
     public function blogs()
     {
-        return $this->hasMany(Blog::class);
+        return $this->hasMany(Post::class);
     }
 }

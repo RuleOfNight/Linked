@@ -8,7 +8,7 @@ use App\Http\Controllers\PostController;
 // Trang chủ
 Route::get('/', [PostController::class, 'home'])->name('home');
 
-// Nhóm route xác thực (Đăng nhập, Đăng ký, Đăng xuất)
+// Nhóm route xác thực (Đăng nhập, Đăng ký)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -26,8 +26,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Routes quản lý bài viết
 Route::middleware(['auth'])->group(function () {
-    Route::resource('posts', PostController::class)->except(['show']);
+    Route::resource('posts', PostController::class);
 });
 
-// Xử lý tạo blog
-Route::post('/blog', [ProfileController::class, 'createBlog'])->middleware('auth');

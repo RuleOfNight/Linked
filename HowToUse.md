@@ -1,0 +1,1 @@
+<p>public/storages là thư mục động, git bỏ qua nên pull code về tự add ảnh</p>
