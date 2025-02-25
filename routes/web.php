@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
@@ -32,8 +34,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-use App\Http\Controllers\LikeController;
-use App\Http\Controllers\CommentController;
 
 Route::post('/posts/{id}/like', [LikeController::class, 'like'])->name('posts.like');
 Route::post('/posts/{id}/comment', [CommentController::class, 'comment'])->name('posts.comment');

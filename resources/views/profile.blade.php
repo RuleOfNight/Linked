@@ -1,30 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $user->name }}'s Profile</title>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-</head>
-<body>
-    <navbar>
-        <div class="top-left-buttons">
-            <form action="{{ route('search') }}" method="GET">
-                <input type="text" name="query" placeholder="Search users..." required>
-                <button type="submit">Search</button>
-            </form>
-        </div>
+@extends('layouts.app')
 
-        <div class="top-right-buttons">
-            <a href="{{ route('posts.index') }}" class="profile-link">Posts</a>
-            <a href="{{ route('profile.edit') }}" class="profile-link">Profile</a>
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="profile-link">Đăng xuất</button>
-            </form>
-        </div>
-    </navbar>
+@section('title', 'Home')
 
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+@endsection
+
+@section('content')
     <div class="container">
         <div class="profile-card">
             <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('avatars/default-avatar.jpg') }}" alt="Profile Picture" class="profile-picture">
@@ -90,4 +73,4 @@
         </div>
     </div>
 </body>
-</html>
+@endsection
