@@ -13,7 +13,7 @@ class LikeController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        // Check nếu đã like
+        // Check nếu đã like tránh buff bẩn
         $existingLike = Like::where('user_id', auth()->id())
                             ->where('post_id', $id)
                             ->first();
