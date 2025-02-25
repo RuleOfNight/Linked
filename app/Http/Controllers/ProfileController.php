@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -51,6 +52,8 @@ class ProfileController extends Controller
             $user->save();
         }
     
+
+
         // Social links
         SocialLink::where('user_id', $user->id)->delete();
         foreach ($request->input('social_links', []) as $link) {
@@ -67,5 +70,22 @@ class ProfileController extends Controller
     }
 
 
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('name', 'LIKE', "%{$query}%")->get();
+        return view('users.search_results', compact('users'));
+    }
+
+
+    
+    public function show($name)
+    {
+        $user = User::where('name', $name)->firstOrFail();
+        $posts = Post::where('user_id', $user->id)->get();
+
+        return view('profile', compact('user','posts'));
+    }
     
 }

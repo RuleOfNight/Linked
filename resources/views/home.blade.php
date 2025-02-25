@@ -223,7 +223,7 @@
 <body>
     <navbar>
         <div class="top-left-buttons">
-            <form action="{{ route('users.search') }}" method="GET">
+            <form action="{{ route('search') }}" method="GET">
                 <input type="text" name="query" placeholder="Search users..." required>
                 <button type="submit">Search</button>
             </form>

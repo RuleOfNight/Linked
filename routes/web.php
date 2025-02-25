@@ -31,18 +31,17 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('posts', PostController::class);
 });
 
-use App\Http\Controllers\UserController;
-
-Route::get('/search', [UserController::class, 'search'])->name('users.search');
 
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
-Route::post('/post/{id}/like', [LikeController::class, 'likePost'])->name('post.like');
-Route::post('/post/{id}/unlike', [LikeController::class, 'unlikePost'])->name('post.unlike');
+Route::post('/posts/{id}/like', [LikeController::class, 'like'])->name('posts.like');
+Route::post('/posts/{id}/comment', [CommentController::class, 'comment'])->name('posts.comment');
+
+Route::get('profile/{name}',[ProfileController::class, 'show'])->name('profile');
+Route::get('/search', [ProfileController::class, 'search'])->name('search');
 
 
-
-Route::get('/profile/{id}', [UserController::class, 'show'])->name('profile');
 
 
 // // Gửi email đặt lại mật khẩu
