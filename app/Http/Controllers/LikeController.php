@@ -1,32 +1,31 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Like;
 use App\Models\Post;
-use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function likePost($postId)
+    // Xử lý like bài post
+    public function like($id)
     {
-        $user = Auth::user();
-        $post = Post::findOrFail($postId);
+        $post = Post::findOrFail($id);
 
-        if (!$post->likes()->where('user_id', $user->id)->exists()) {
-            $post->likes()->create(['user_id' => $user->id]);
+        // Check nếu đã like
+        $existingLike = Like::where('user_id', auth()->id())
+                            ->where('post_id', $id)
+                            ->first();
+
+        if (!$existingLike) {
+            $like = new Like();
+            $like->user_id = auth()->id();
+            $like->post_id = $id;
+            $like->save();
         }
 
-        return back()->with('success', 'Post liked!');
+        return redirect()->back()->with('success', 'Post liked!');
     }
 
-    public function unlikePost($postId)
-    {
-        $user = Auth::user();
-        $post = Post::findOrFail($postId);
-
-        $post->likes()->where('user_id', $user->id)->delete();
-
-        return back()->with('success', 'Post unliked!');
-    }
 }

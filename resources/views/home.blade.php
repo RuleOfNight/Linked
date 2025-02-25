@@ -274,14 +274,10 @@
                                 <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image">
                             @endif
                             <small>Created at: {{ $post->created_at }}</small>
-                            
-                            <form action="{{ route('post.like', $post->id) }}" method="POST">
+                            <!-- Like -->
+                            <form action="{{ route('posts.like', $post->id) }}" method="POST">
                                 @csrf
                                 <button type="submit">Like</button>
-                            </form>
-                            <form action="{{ route('post.unlike', $post->id) }}" method="POST">
-                                @csrf
-                                <button type="submit">Unlike</button>
                             </form>
                             <p>Liked by {{ $post->likes->count() }} people</p>
 
