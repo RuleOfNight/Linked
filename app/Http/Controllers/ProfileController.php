@@ -80,12 +80,11 @@ class ProfileController extends Controller
 
 
     
-    public function show($name)
+    public function show($id)
     {
-        $user = User::where('name', $name)->firstOrFail();
-        $posts = Post::where('user_id', $user->id)->get();
-
-        return view('profile', compact('user','posts'));
+        $user = User::findOrFail($id);
+        $posts = Post::where('user_id', $id)->with(['comments.user', 'likes'])->get();
+        return view('profile', compact('user', 'posts'));
     }
     
 }

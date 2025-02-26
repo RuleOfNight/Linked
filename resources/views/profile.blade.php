@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
-
+@section('title', $user->name . "'s Profile")
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
@@ -9,8 +8,11 @@
 
 @section('content')
     <div class="container">
+        <!-- Profile Card -->
         <div class="profile-card">
-            <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('avatars/default-avatar.jpg') }}" alt="Profile Picture" class="profile-picture">
+            <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('avatars/default-avatar.jpg') }}" 
+                 alt="Profile Picture" 
+                 class="profile-picture">
             <h1 class="profile-name">{{ $user->name }}</h1>
             <p class="profile-bio">{{ $user->bio }}</p>
 
@@ -27,6 +29,7 @@
             </div>
         </div>
 
+        <!-- Blog Area -->
         <div class="blog-area">
             <h2 class="blog-heading">{{ $user->name }}'s Blog</h2>
             <div class="blog-posts">
@@ -35,42 +38,42 @@
                 @else
                     @foreach ($posts as $post)
                         <div class="blog-post">
-                            <h3>{{ $post->title }}</h3>
-                            <p>{{ $post->content }}</p>
-                            @if ($post->image)
-                                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image">
-                            @endif
-                            <small>Created at: {{ $post->created_at }}</small>
+                            <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none text-dark">
+                                <h3>{{ $post->title }}</h3>
+                                <p>{{ Str::limit($post->content, 200) }}</p>
+                                @if ($post->image)
+                                    <img src="{{ asset('storage/' . $post->image) }}" 
+                                         alt="Post Image" 
+                                         class="post-image">
+                                @endif
+                                <small>Created at: {{ $post->created_at->format('M d, Y') }}</small>
+                            </a>
 
                             <!-- Like Button -->
-                            <form action="{{ route('posts.like', $post->id) }}" method="POST">
+                            <form action="{{ route('posts.like', $post->id) }}" method="POST" class="like-button">
                                 @csrf
-                                <button type="submit">Like</button>
-                            </form>
-                            <p>Liked by {{ $post->likes->count() }} people</p>
-
-                            <!-- Comment Form -->
-                            <form action="{{ route('posts.comment', $post->id) }}" method="POST">
-                                @csrf
-                                <textarea name="content" placeholder="Add a comment..." required></textarea>
-                                <button type="submit">Comment</button>
+                                <button type="submit">Like ({{ $post->likes->count() }})</button>
                             </form>
 
-                            <!-- Display Comments -->
-                            <div class="comments">
-                                @foreach ($post->comments as $comment)
-                                    <div class="comment">
-                                        <strong>{{ $comment->user->name }}</strong>
-                                        <p>{{ $comment->content }}</p>
-                                        <small>{{ $comment->created_at }}</small>
+                                <!-- Pinned Comments -->
+                                @if ($post->comments->where('pinned', true)->count() > 0)
+                                    <div class="pinned-comments">
+                                        <h5 class="mb-3">📌 Pinned Comments</h5>
+                                        @foreach ($post->comments->where('pinned', true) as $comment)
+                                            <div class="pinned-comment">
+                                                <div class="card-body">
+                                                    <strong>{{ $comment->user->name }}</strong>
+                                                    <p>{{ $comment->content }}</p>
+                                                    <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                @endforeach
-                            </div>
+                                @endif
                         </div>
                     @endforeach
                 @endif
             </div>
         </div>
     </div>
-</body>
 @endsection

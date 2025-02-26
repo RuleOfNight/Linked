@@ -34,11 +34,14 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::post('/posts/{id}/like', [LikeController::class, 'like'])->name('posts.like');
-Route::post('/posts/{id}/comment', [CommentController::class, 'comment'])->name('posts.comment');
+//Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/posts/{id}/comments', [CommentController::class, 'store'])->name('posts.comments');
+Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::post('/comments/{id}/pin', [CommentController::class, 'pin'])->name('comments.pin');
 
-Route::get('profile/{name}',[ProfileController::class, 'show'])->name('profile');
+Route::get('profile/{id}',[ProfileController::class, 'show'])->name('profile');
 Route::get('/search', [ProfileController::class, 'search'])->name('search');
 
 

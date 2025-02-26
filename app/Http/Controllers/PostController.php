@@ -151,4 +151,10 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post updated successfully!');
     }
+
+    public function show($id)
+    {
+        $post = Post::with(['comments', 'likes'])->findOrFail($id); // Lấy bài viết kèm comments và likes
+        return view('posts.show', compact('post'));
+    }
 }
