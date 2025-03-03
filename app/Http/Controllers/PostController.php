@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+
 
 class PostController extends Controller
 {
@@ -72,7 +76,7 @@ class PostController extends Controller
         $user = Auth::user();
     
         if (!$user) {
-            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập hoặc đăng ký nếu chưa có tài khoản');
+            return redirect()->route('login')->with('error', 'Please login');
         }
     
         $posts = Post::where('user_id', $user->id)->latest()->get();
@@ -129,7 +133,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096',
         ]);
 
 
@@ -139,7 +143,8 @@ class PostController extends Controller
             if ($post->image) {
                 Storage::delete('public/' . $post->image);
             }
-            $path = $request->file('image')->store('images', 'public'); // Lưu ảnh mới
+            $path = $request->file('image')->store('images', 'public');
+            // Laravel đã sp khá tốt vụ ảnh trùng nhau
         }
 
         // Cập nhật bài viết

@@ -86,6 +86,8 @@
 
     <script>
         document.getElementById('add-social-link').addEventListener('click', function() {
+            console.log('đuawadwadawdaw')
+            // event -> server
             const container = document.getElementById('social-links-container');
             const index = container.querySelectorAll('.social-link-group').length;
             const newGroup = document.createElement('div');
@@ -100,7 +102,8 @@
             container.appendChild(newGroup);
         });
 
-        document.addEventListener('click', function(event) {
+        document.getElementById('social-links-container').addEventListener('click', function(event) {
+            console.log('sssssssssssss')
             if (event.target.classList.contains('remove-social-link')) {
                 event.target.closest('.social-link-group').remove();
             }

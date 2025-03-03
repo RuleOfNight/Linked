@@ -38,13 +38,11 @@
                 @else
                     @foreach ($posts as $post)
                         <div class="blog-post">
-                            <a href="{{ route('posts.show', $post->id) }}" class="text-decoration-none text-dark">
+                            <a href="{{ route('posts.show', $post->id) }}">
                                 <h3>{{ $post->title }}</h3>
                                 <p>{{ Str::limit($post->content, 200) }}</p>
                                 @if ($post->image)
-                                    <img src="{{ asset('storage/' . $post->image) }}" 
-                                         alt="Post Image" 
-                                         class="post-image">
+                                    <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" class="post-image">
                                 @endif
                                 <small>Created at: {{ $post->created_at->format('M d, Y') }}</small>
                             </a>

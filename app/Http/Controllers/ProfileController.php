@@ -40,14 +40,14 @@ class ProfileController extends Controller
         // Xử lý upload avatar
         if ($request->hasFile('avatar')) {
             $request->validate([
-                'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:4096', // Max 4MB
+                'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:4096',
             ]);
     
             $avatarFile = $request->file('avatar');
             $avatarName = time() . '_' . $avatarFile->getClientOriginalName();
             $path = $avatarFile->storeAs('public/avatars', $avatarName);
     
-            // Đường dẫn avatar trong database
+
             $user->profile_picture = str_replace('public/', '', $path);
             $user->save();
         }
