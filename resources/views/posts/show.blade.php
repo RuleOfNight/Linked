@@ -22,7 +22,7 @@
                 <!-- Like Button -->
                 <form action="{{ route('posts.like', $post->id) }}" method="POST">
                     @csrf
-                    <button type="submit">
+                    <button type="submit" class="submit">
                         Like ({{ $post->likes->count() }})
                     </button>
                 </form>
@@ -39,7 +39,7 @@
                         <div>
                             <textarea name="content" rows="3" placeholder="Write a comment..."></textarea>
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" class="submit">Submit</button>
                     </form>
                 @else
                     <p class="text-muted">Please <a href="{{ route('login') }}">login</a> to comment.</p>
@@ -60,11 +60,11 @@
                                         <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit">Delete</button>
+                                            <button type="submit" class="submit">Delete</button>
                                         </form>
                                         <form action="{{ route('comments.pin', $comment->id) }}" method="POST">
                                             @csrf
-                                            <button type="submit">
+                                            <button type="submit" class="submit">
                                                 {{ $comment->pinned ? 'Unpin' : 'Pin' }}
                                             </button>
                                         </form>

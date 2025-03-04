@@ -50,7 +50,7 @@
                             <!-- Like Button -->
                             <form action="{{ route('posts.like', $post->id) }}" method="POST" class="like-button">
                                 @csrf
-                                <button type="submit">Like ({{ $post->likes->count() }})</button>
+                                <button type="submit" class="like-button">Like ({{ $post->likes->count() }})</button>
                             </form>
 
                                 <!-- Pinned Comments -->
